@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GymBot</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <!-- Auth Section -->
+    <div id="authSection" class="card">
+      <h2 id="authTitle">Login</h2>
+      <input type="email" id="email" placeholder="Email" />
+      <input type="password" id="password" placeholder="Password" />
+      <button class="btn" onclick="authHandler()">Continue</button>
+      <p><a href="#" onclick="toggleAuth()">Switch to <span id="authSwitch">Sign Up</span></a></p>
+    </div>
+
+    <!-- Chat Section -->
+    <div id="chatSection" class="card hidden">
+      <div class="chat-header">
+        <h2>🏋️ GymBot</h2>
+        <div>
+          <select id="theme" onchange="switchTheme()">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+          </select>
+          <button class="btn secondary" onclick="signOut()">Sign Out</button>
+        </div>
+      </div>
+
+      <!-- User Info and Utilities -->
+      <p style="margin: 0.5rem 0;">Logged in as: <span id="userEmail">...</span></p>
+      <div style="margin-bottom: 1rem; display: flex; gap: 0.5rem;">
+        <button class="btn secondary" onclick="changePassword()">Change Password</button>
+        <button class="btn secondary" onclick="exportChat()">Export Chat</button>
+      </div>
+
+      <!-- Chat Controls -->
+      <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+        <select id="chatList" onchange="loadChatHistory()"></select>
+        <button class="btn" onclick="createNewChat()">+ New Chat</button>
+      </div>
+
+      <!-- Chat Interface -->
+      <div class="chat-box" id="chatBox"></div>
+      <input type="text" id="userInput" placeholder="Ask something..." onkeypress="if(event.key==='Enter') sendMessage()" />
+      <button class="btn" onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
