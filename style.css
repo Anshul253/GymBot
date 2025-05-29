@@ -79,34 +79,35 @@ button.secondary {
   margin-bottom: 0.5rem;
 }
 
-/* DARK THEME */
+/* SYSTEM DARK THEME DETECTION */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #222;
+    color: #eee;
+  }
 
-body.dark {
-  background: #222;
-  color: #eee;
-}
+  .card {
+    background: #333;
+  }
 
-body.dark .card {
-  background: #333;
-}
+  input,
+  select {
+    background: #555;
+    color: #fff;
+    border: 1px solid #999;
+  }
 
-body.dark input,
-body.dark select {
-  background: #555;
-  color: #fff;
-  border: 1px solid #999;
-}
+  .chat-box {
+    background: #444;
+    color: #eee;
+    border: 1px solid #666;
+  }
 
-body.dark .chat-box {
-  background: #444;
-  color: #eee;
-  border: 1px solid #666;
-}
+  .user-msg {
+    color: #66ccff;
+  }
 
-body.dark .user-msg {
-  color: #66ccff;
-}
-
-body.dark .bot-msg {
-  color: #ddd;
+  .bot-msg {
+    color: #ddd;
+  }
 }
