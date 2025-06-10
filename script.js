@@ -1,3 +1,6 @@
+// Set your live Render backend URL here
+const BASE_URL = "https://gymbot-2hq2.onrender.com";
+
 let isLogin = true;
 let token = localStorage.getItem("token");
 let currentChatId = null;
@@ -14,7 +17,7 @@ function authHandler() {
   const password = document.getElementById("password").value;
   const route = isLogin ? "/login" : "/register";
 
-  fetch("http://localhost:5000" + route, {
+  fetch(BASE_URL + route, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password })
@@ -56,7 +59,7 @@ function sendMessage() {
   appendMessage("user", message);
   input.value = "";
 
-  fetch("http://localhost:5000/chat", {
+  fetch(`${BASE_URL}/chat`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -103,7 +106,7 @@ function applySavedTheme() {
 function createNewChat() {
   const title = prompt("Enter a chat title:");
   if (!title) return;
-  fetch("http://localhost:5000/chat/new", {
+  fetch(`${BASE_URL}/chat/new`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -118,7 +121,7 @@ function createNewChat() {
 }
 
 function loadChats(selectChatId) {
-  fetch("http://localhost:5000/chats", {
+  fetch(`${BASE_URL}/chats`, {
     headers: {
       "Authorization": "Bearer " + localStorage.getItem("token")
     }
@@ -135,7 +138,7 @@ function loadChats(selectChatId) {
         opt.addEventListener("contextmenu", e => {
           e.preventDefault();
           if (confirm(`Delete chat "${chat.title}"?`)) {
-            fetch(`http://localhost:5000/chat/${chat.chat_id}`, {
+            fetch(`${BASE_URL}/chat/${chat.chat_id}`, {
               method: "DELETE",
               headers: {
                 "Authorization": "Bearer " + localStorage.getItem("token")
@@ -161,7 +164,7 @@ function loadChatHistory() {
   currentChatId = document.getElementById("chatList").value;
   if (!currentChatId) return;
 
-  fetch(`http://localhost:5000/chat/${currentChatId}/messages`)
+  fetch(`${BASE_URL}/chat/${currentChatId}/messages`)
     .then(res => res.json())
     .then(data => {
       const chatBox = document.getElementById("chatBox");
@@ -175,7 +178,7 @@ function changePassword() {
   const newPass = prompt("Enter new password:");
   if (!oldPass || !newPass) return;
 
-  fetch("http://localhost:5000/change-password", {
+  fetch(`${BASE_URL}/change-password`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
